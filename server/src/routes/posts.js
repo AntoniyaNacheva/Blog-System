@@ -1,6 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import { PostModel } from "../models/Posts.js";
+import { verifyToken } from "./users.js";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
 	const post = new PostModel(req.body);
 
 	try {
@@ -23,6 +23,5 @@ router.post("/", async (req, res) => {
 		res.json(err);
 	}
 });
-
 
 export { router as postRouter };

@@ -14,8 +14,8 @@ export const Auth = () => {
 
 const Login = () => {
 
-	const [username, setUsername] = useState();
-	const [password, setPassword] = useState();
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
 
 	const [_, setCookies] = useCookies(["access_token"]);
 
@@ -52,8 +52,8 @@ const Login = () => {
 
 const Register = () => {
 
-	const [username, setUsername] = useState();
-	const [password, setPassword] = useState();
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
 
 	const onSubmit = async (event) => {
 		event.preventDefault();

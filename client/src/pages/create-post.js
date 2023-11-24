@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getUserId } from "../hooks/getUserId";
+import { useCookies } from "react-cookie"
 
 export const CreatePost = () => {
 	const userID = getUserId();
+	const [cookies, _] = useCookies(["access_token"]);
 
 	const [post, setPost] = useState({
 		title: "",
@@ -23,7 +25,9 @@ export const CreatePost = () => {
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			await axios.post("http://localhost:3001/posts", post);
+			await axios.post("http://localhost:3001/posts", post, {
+				headers: { autorization: cookies.access_token }
+			});
 			alert("Post created!");
 			navigate("/");
 		} catch (err) {
