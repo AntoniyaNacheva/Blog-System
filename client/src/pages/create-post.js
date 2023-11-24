@@ -1,29 +1,35 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { getUserId } from "../hooks/getUserId";
 
 export const CreatePost = () => {
+	const userID = getUserId();
 
 	const [post, setPost] = useState({
 		title: "",
 		theme: "",
 		imageUrl: "",
-		author: 0
+		author: userID
 	});
+
+	const navigate = useNavigate();
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setPost({ ...post, [name]: value });
-	}
+	};
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		try {
 			await axios.post("http://localhost:3001/posts", post);
 			alert("Post created!");
+			navigate("/");
 		} catch (err) {
 			console.error(err);
 		}
-	}
+	};
 
 	return (
 		<div className="create-post">
