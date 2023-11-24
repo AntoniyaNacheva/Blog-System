@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", userRouter);
+app.use("/users", userRouter);
 app.use("/posts", postRouter);
 
 mongoose.connect(

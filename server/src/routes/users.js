@@ -41,6 +41,15 @@ router.post("/login", async (req, res) => {
 	res.json({ token, userID: user._id });
 });
 
+router.get("/", async (req, res) => {
+	try {
+		const result = await UserModel.find({});
+		res.json(result);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
 export { router as userRouter };
 
 export const verifyToken = (req, res, next) => {

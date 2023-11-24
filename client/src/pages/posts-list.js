@@ -10,7 +10,6 @@ export const PostsList = () => {
 			try {
 				const result = await axios.get("http://localhost:3001/posts");
 				setPosts(result.data);
-				console.log(posts);
 			} catch (err) {
 				console.error(err);
 			}

@@ -16,6 +16,8 @@ export const Navbar = () => {
 		<div className="navbar">
 			<Link to="/"> Home</Link>
 			<Link to="/posts-list"> Posts List</Link>
+			<Link to="/users-list"> Users List</Link>
+
 			{!cookies.access_token ? (
 				<Link to="/auth"> Login/Register</Link>
 			) : (
