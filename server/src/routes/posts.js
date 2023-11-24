@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
 	try {
 		const result = await PostModel.find({});
-		res.json.result;
+		res.json(result);
 	} catch (err) {
 		res.json(err);
 	}
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
 
 	try {
 		await post.save();
-		res.json.post;
+		res.json(post);
 	} catch (err) {
 		res.json(err);
 	}
