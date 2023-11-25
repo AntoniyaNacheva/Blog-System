@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -17,7 +17,19 @@ export const PostDetails = () => {
 		};
 
 		fetchPost();
-	}, []);
+	}, [postId]);
+
+	const navigate = useNavigate();
+
+	const deletePost = async () => {
+		try {
+			await axios.delete(`http://localhost:3001/posts/${postId}`);
+			alert("Post deleted successfully!");
+			navigate("/posts-list");
+		} catch (err) {
+			console.error(err);
+		}
+	}
 
 	return (
 		<div>
@@ -26,7 +38,7 @@ export const PostDetails = () => {
 				<>
 					<div>
 						<h2>{post.title}</h2>
-						<button> Delete </button>
+						<button onClick={deletePost}> Delete </button>
 					</div>
 					<div>
 						<p>{post.theme}</p>
