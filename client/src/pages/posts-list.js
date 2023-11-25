@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export const PostsList = () => {
@@ -26,6 +27,9 @@ export const PostsList = () => {
 					<li key={post._id}>
 						<div>
 							<h2>{post.title}</h2>
+							<Link to={`/posts-list/${post._id}`}>
+								<button > Details </button>
+							</Link>
 						</div>
 						<div>
 							<p>{post.theme}</p>

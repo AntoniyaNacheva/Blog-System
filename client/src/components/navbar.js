@@ -7,7 +7,7 @@ export const Navbar = () => {
 	const navigate = useNavigate();
 
 	const logout = () => {
-		setCookies("access_token", "");
+		setCookies("access_token", "", { sameSite: "None", secure: true });
 		window.localStorage.removeItem("userID");
 		navigate("/auth");
 	}

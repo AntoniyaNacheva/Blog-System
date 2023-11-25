@@ -13,6 +13,15 @@ router.get("/", async (req, res) => {
 	}
 });
 
+router.get("/:postId", async (req, res) => {
+	try {
+		const result = await PostModel.findById(req.params.postId);
+		res.json(result);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
 router.post("/", verifyToken, async (req, res) => {
 	const post = new PostModel(req.body);
 

@@ -30,7 +30,7 @@ const Login = () => {
 				password,
 			});
 
-			setCookies("access_token", result.data.token);
+			setCookies("access_token", result.data.token, { sameSite: "None", secure: true });
 			window.localStorage.setItem("userID", result.data.userID);
 			navigate("/");
 		} catch (err) {

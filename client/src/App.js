@@ -4,6 +4,7 @@ import { Home } from "./pages/home";
 import { Auth } from "./pages/auth";
 import { CreatePost } from "./pages/create-post";
 import { PostsList } from "./pages/posts-list";
+import { PostDetails } from "./pages/post-details";
 import { UsersList } from "./pages/users-list";
 import { Navbar } from './components/navbar';
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/auth' element={<Auth />} />
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/posts-list' element={<PostsList />} />
+          <Route path='/posts-list/:postId' element={<PostDetails />} />
           <Route path='/users-list' element={<UsersList />} />
         </Routes>
       </Router>
