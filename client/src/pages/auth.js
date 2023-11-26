@@ -32,8 +32,12 @@ const Login = () => {
 
 			setCookies("access_token", result.data.token, { sameSite: "None", secure: true });
 			window.localStorage.setItem("userID", result.data.userID);
+			if(result.data.userID === undefined) {
+				return alert("Username or password is incorrect!")
+			}
 			navigate("/");
 		} catch (err) {
+			alert("Username or password is incorrect!")
 			console.error(err);
 		}
 	}
