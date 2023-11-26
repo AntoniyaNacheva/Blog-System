@@ -20,7 +20,7 @@ export const PostsList = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="posts-list">
 			<h1> Posts List</h1>
 			<ul>
 				{posts.map((post) => (

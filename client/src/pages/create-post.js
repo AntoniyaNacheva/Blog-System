@@ -29,7 +29,7 @@ export const CreatePost = () => {
 				headers: { authorization: cookies.access_token }
 			});
 			alert("Post created!");
-			navigate("/");
+			navigate("/posts-list");
 		} catch (err) {
 			console.error(err);
 		}

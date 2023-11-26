@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getUserId } from "../hooks/getUserId";
 import axios from "axios";
 
 export const PostDetails = () => {
 	const { postId } = useParams();
 	const [post, setPost] = useState();
+	const userID = getUserId();
 
 	useEffect(() => {
 		const fetchPost = async () => {
@@ -32,13 +34,17 @@ export const PostDetails = () => {
 	}
 
 	return (
-		<div>
+		<div className="details">
 			<h1> Details </h1>
 			{post ? (
 				<>
 					<div>
 						<h2>{post.title}</h2>
-						<button onClick={deletePost}> Delete </button>
+						{userID === post.author && (
+							<div>
+								<button onClick={deletePost}> Delete </button>
+							</div>
+						)}
 					</div>
 					<div>
 						<p>{post.theme}</p>

@@ -23,7 +23,7 @@ export const UsersList = () => {
 			<h1> Users List</h1>
 			<ul>
 				{users.map((user) => (
-					<li key={user._id}>
+					<li className="users-list" key={user._id}>
 						<div>
 							<h2>{user.username}</h2>
 						</div>
