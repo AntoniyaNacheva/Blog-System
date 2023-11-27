@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { SECRET } from '../constants.js';
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.post("/register", async (req, res) => {
 	const user = await UserModel.findOne({ username });
 
 	if (user) {
-		return res.json({ message: "User already exists!" });
+		return res.status(400).json({ message: "User already exists!" });
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);
@@ -38,7 +39,8 @@ router.post("/login", async (req, res) => {
 			return res.status(400).json({ message: "Username or password is incorrect!" });
 		}
 
-		const token = jwt.sign({ id: user._id }, "secret");
+		const token = jwt.sign({ id: user._id }, SECRET);
+		res.cookie('auth', token);
 		res.json({ token, userID: user._id });
 
 	} catch (err) {
@@ -55,18 +57,23 @@ router.get("/", async (req, res) => {
 	}
 });
 
-export { router as userRouter };
-
 export const verifyToken = (req, res, next) => {
-	const token = req.headers.authorization;
+	const token = req.cookies['auth']
+
 	if (token) {
-		jwt.verify(token, "secret", (err) => {
-			if (err) {
-				return res.sendStatus(403);
-			}
-			next();
-		});
-	} else {
-		res.sendStatus(401);
+		try {
+			const decodedToken = jwt.verify(token, SECRET);
+
+			req.user = decodedToken;
+			res.locals.isAuthenticated = true;
+			res.locals.user = decodedToken;
+		} catch (err) {
+			res.clearCookie('auth');
+			return res.status(401);
+		}
 	}
+
+	next();
 };
+
+export { router as userRouter };

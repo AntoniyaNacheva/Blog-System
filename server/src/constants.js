@@ -1,0 +1,1 @@
+export const SECRET = "BLOG_SYSTEM";
