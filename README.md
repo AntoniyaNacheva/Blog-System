@@ -61,7 +61,7 @@ Runs the app in the development mode.\
         *Logged in
 
         -create a post
-        -delete post if is author
+        -delete post by the author
 
 # Blog-System including:
 
